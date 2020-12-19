@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/types.h>
 #include <stdarg.h>
 #include <unistd.h>
 #include <string.h>
@@ -47,4 +49,5 @@ stack_t *remove_end(stack_t **head);
 void free_list(stack_t *head);
 
 char *check_error(int ac, char **av);
+int count_bytes(FILE *file);
 #endif

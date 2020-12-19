@@ -30,3 +30,18 @@ char *check_error(int ac, char **av)
 	}
 	return (NULL);
 }
+
+/**
+ * count_bytes - counts the number of bytes in a file
+ * Return: number of bytes
+ * @file: file pointer to file that will have bytes counted
+ */
+
+int count_bytes(FILE *file)
+{
+	int bytes;
+
+	for (bytes = 0; getc(file) != EOF; bytes++)
+		;
+	return (bytes);
+}
