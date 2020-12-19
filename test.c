@@ -1,7 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "monty.h"
 
-int main(int argc, char **av)
+int main(int ac, char **av)
 {
-	
+	char *error = check_error(ac, av);
+	if (error != NULL)
+		write(	
+	return (0);
 }

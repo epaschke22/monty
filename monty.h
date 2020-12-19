@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <unistd.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -47,4 +48,6 @@ stack_t *add_end(stack_t **head, const int n);
 stack_t *remove_first(stack_t **head);
 stack_t *remove_end(stack_t **head);
 void free_list(stack_t *head);
+
+char *check_error(int ac, char **av);
 #endif
