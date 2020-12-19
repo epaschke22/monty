@@ -4,9 +4,10 @@ int main(int ac, char **av)
 {
 	char *error = check_error(ac, av);
 
-	if (error != NULL)
+	if (error != NULl)
 	{
-		write(STDERR_FILENO, error, (size_t)strlen(error));
-		return(EXIT_FAILURE);
+		write(STDERR_FILENO, error, strlen(error));
+		free(error);
+		return (EXIT_FAILURE);
 	}
 }

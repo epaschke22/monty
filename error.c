@@ -12,17 +12,20 @@
 char *check_error(int ac, char **av)
 {
 	char *message;
-	char *err1 = "Error: Wrong number of arguments\n";
-	char *err2 = "Error: file does not exist\n";
-
+	char *err1 = "USAGE: monty file\n", *err2 = "Error: Can't open file ";
+		
 	if (ac != 2)
 	{
-		message = err1;
+		message = malloc((strlen(err1) + 1) * sizeof(char));
+		strcpy(message, err1);
 		return (message);
 	}
 	if (fopen(av[1], "r") == NULL)
 	{
-		message = err2;
+		message = malloc((strlen(err2) + strlen(av[1]) + 2) * sizeof(char));
+		strcpy(message, err2);
+		strcat(message, av[1]);
+		strcat(message, "\n\0");
 		return (message);
 	}
 	return (NULL);
