@@ -41,4 +41,10 @@ int _strcmp(char *s1, char *s2);
 
 char **str_to_double(char *input, char *delm);
 void free_double(char **dptr);
+
+stack_t *add_first(stack_t **head, const int n);
+stack_t *add_end(stack_t **head, const int n);
+stack_t *remove_first(stack_t **head);
+stack_t *remove_end(stack_t **head);
+void free_list(stack_t *head);
 #endif
