@@ -3,7 +3,10 @@
 int main(int ac, char **av)
 {
 	char *error = check_error(ac, av);
+
 	if (error != NULL)
-		write(	
-	return (0);
+	{
+		write(STDERR_FILENO, error, (size_t)strlen(error));
+		return(EXIT_FAILURE);
+	}
 }
