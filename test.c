@@ -18,6 +18,7 @@ void (*get_command(char *name))(stack_t **stack, unsigned int line_number)
 	}
 	printf("WHERE IS MY FUNCTION??");
 	return (NULL);
+
 }
 
 
@@ -47,6 +48,7 @@ void run_commands(char **lines, stack_t **head)
 int main(int ac, char **av)
 {
 	stack_t *head = NULL;
+
 	char *error = check_error(ac, av), *buffer = NULL;
 	char **lines = NULL, **ops = NULL;
 	int bytes = 0, fd = 0, i;
