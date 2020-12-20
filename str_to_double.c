@@ -20,13 +20,13 @@ char **str_to_double(char *input, char *delm)
 	item = strtok(input, delm);
 	for (i = 0; item != NULL; i++)
 	{
-		output[i] = malloc(sizeof(char) * (_strlen(item) + 1));
+		output[i] = malloc(sizeof(char) * (strlen(item) + 1));
 		if (output[i] == NULL)
 		{
 			free_double(output);
 			return (NULL);
 		}
-		_strcpy(output[i], item);
+		strcpy(output[i], item);
 		item = strtok(NULL, delm);
 	}
 	output[i] = NULL;
