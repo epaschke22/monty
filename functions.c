@@ -9,16 +9,16 @@
 
 void push(stack_t **stack, int data)
 {
-	add_first(&stack, data);
+	add_first(stack, data);
 }
 
 void pall(stack_t **head, unsigned int line_number)
 {
-	stack *start = *head;
+	stack_t *start = *head;
 
 	while (start != NULL)
 	{
 		printf("%d\n", start->n);
-		start++;
+		start = start->next;
 	}
 }
