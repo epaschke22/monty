@@ -3,7 +3,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/types.h>
 #include <stdarg.h>
+#include <unistd.h>
+#include <string.h>
+
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -35,10 +40,6 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-int _strlen(char *s);
-char *_strcpy(char *dest, char *src);
-int _strcmp(char *s1, char *s2);
-
 char **str_to_double(char *input, char *delm);
 void free_double(char **dptr);
 
@@ -47,4 +48,7 @@ stack_t *add_end(stack_t **head, const int n);
 stack_t *remove_first(stack_t **head);
 stack_t *remove_end(stack_t **head);
 void free_list(stack_t *head);
+
+char *check_error(int ac, char **av);
+int count_bytes(FILE *file);
 #endif
