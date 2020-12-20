@@ -13,16 +13,18 @@ void (*get_command(char *name))(stack_t **stack, unsigned int line_number)
 
 	for (i = 0; cmd_list[i].opcode != NULL; i++)
 	{
-		if (cmd_list[i].opcode == *name)
-			return(cmd_list[i].f)
+		if (strcmp(cmd_list[i].opcode, name) == 0)
+			return(cmd_list[i].f);
 	}
-	return (NULL)
+	printf("WHERE IS MY FUNCTION??");
+	return (NULL);
+
 }
 
 
 void run_commands(char **lines, stack_t **head)
 {
-	int i, j;
+	unsigned int i, j;
 	void (*output)(stack_t **stack, unsigned int line_number); 
 	char **ops = NULL;
 	
@@ -30,19 +32,29 @@ void run_commands(char **lines, stack_t **head)
 	{
 		ops = str_to_double(lines[i], " ");
 		if (strcmp(ops[0], "nop") == 0)
+		{
+			free_double(ops);
 			continue;
+		}
 		if (strcmp(ops[0], "push") == 0)
-			/* run push function here */
+		{
+			push(head, ops[1], i, ops, lines);
+			free_double(ops);
+			continue;
+		}
+		/*check error function that takes line and ops to be freed */
 		output = get_command(ops[0]);
 		if (output== NULL)
-			print_error(ops[0], i, lines, head);
-		output(&head, i);
+			printf("OUTPUT IS NULL");
+		output(head, i);
+		free_double(ops);
 	}
 }
 
 int main(int ac, char **av)
 {
-	stack_t *head;
+	stack_t *head = NULL;
+
 	char *error = check_error(ac, av), *buffer = NULL;
 	char **lines = NULL, **ops = NULL;
 	int bytes = 0, fd = 0, i;

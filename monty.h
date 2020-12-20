@@ -52,4 +52,7 @@ void free_list(stack_t *head);
 
 char *check_error(int ac, char **av);
 int count_bytes(FILE *file);
+void push(stack_t **head, int data);
+void pall(stack_t **head, unsigned int line_number);
+int dlistint_len(stack_t *node);
 #endif
