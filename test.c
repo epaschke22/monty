@@ -13,10 +13,12 @@ void (*get_command(char *name))(stack_t **stack, unsigned int line_number)
 
 	for (i = 0; cmd_list[i].opcode != NULL; i++)
 	{
-		if (cmd_list[i].opcode == *name)
-			return(cmd_list[i].f)
+		if (strcmp(cmd_list[i].opcode, name) == 0)
+			return(cmd_list[i].f);
 	}
-	return (NULL)
+	printf("WHERE IS MY FUNCTION??");
+	return (NULL);
+
 }
 
 
@@ -32,17 +34,21 @@ void run_commands(char **lines, stack_t **head)
 		if (strcmp(ops[0], "nop") == 0)
 			continue;
 		if (strcmp(ops[0], "push") == 0)
-			/* run push function here */
+		{	
+			push(head, atoi(ops[1]));
+			continue;
+		}	
 		output = get_command(ops[0]);
 		if (output== NULL)
-			print_error(ops[0], i, lines, head);
-		output(&head, i);
+			printf("OUTPUT IS NULL");
+		output(head, i);
 	}
 }
 
 int main(int ac, char **av)
 {
-	stack_t *head;
+	stack_t *head = NULL;
+
 	char *error = check_error(ac, av), *buffer = NULL;
 	char **lines = NULL, **ops = NULL;
 	int bytes = 0, fd = 0, i;
