@@ -60,6 +60,7 @@ int count_bytes(FILE *file)
 	return (bytes);
 }
 
+
 /* void free_all(void)
 {
 	free_double(bucket->lines);
