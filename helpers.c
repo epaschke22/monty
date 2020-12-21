@@ -60,9 +60,10 @@ int count_bytes(FILE *file)
 	return (bytes);
 }
 
-void free_all(void)
+
+/* void free_all(void)
 {
 	free_double(bucket->lines);
 	free_double(bucket->ops);
 	free_list(bucket->head);
-}
+} */

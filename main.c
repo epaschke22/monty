@@ -1,5 +1,7 @@
 #include "monty.h"
 
+bucket *buckit;
+
 /**
  * get_command - returns function pointer based on input name
  * @name: name to compare for function
@@ -34,32 +36,30 @@ void (*get_command(char *name))(stack_t **stack, unsigned int line_number)
  * @head: linked list stack pointing to head
  * Return: always 0
  */
-void run_commands(char **lines, stack_t **head)
+void run_commands(void)
 {
 	unsigned int i;
 	void (*output)(stack_t **stack, unsigned int line_number); 
-	char **ops = NULL;
 	
-	for (i = 0; lines[i] != NULL; i++)
+	for (i = 0; buckit->lines[i] != NULL; i++)
 	{
-		ops = str_to_double(lines[i], " ");
-		if (strcmp(ops[0], "nop") == 0)
+		buckit->ops = str_to_double(buckit->lines[i], " ");
+		if (strcmp(buckit->ops[0], "nop") == 0)
 		{
-			free_double(ops);
+			free_double(buckit->ops);
 			continue;
 		}
-		if (strcmp(ops[0], "push") == 0)
+		if (strcmp(buckit->ops[0], "push") == 0)
 		{
-			push(head, ops[1]);
-			free_double(ops);
+			push(&(buckit->head), buckit->ops[1]);
+			free_double(buckit->ops);
 			continue;
 		}
-		/*check error function that takes line and ops to be freed */
-		output = get_command(ops[0]);
+		output = get_command(buckit->ops[0]); 
 		if (output== NULL)
 			printf("OUTPUT IS NULL");
-		output(head, i);
-		free_double(ops);
+		output(&(buckit->head), i);
+		free_double(buckit->ops);
 	}
 }
 
@@ -71,14 +71,10 @@ void run_commands(char **lines, stack_t **head)
  */
 int main(int ac, char **av)
 {
-	stack_t *head = NULL;
-
 	char *error = check_error(ac, av), *buffer = NULL;
-	char **lines = NULL;
 	int bytes = 0, fd = 0;
 	FILE *code = NULL;
 
-	head = NULL;
 	if (error != NULL)
 	{
 		write(STDERR_FILENO, error, strlen(error));
@@ -97,11 +93,17 @@ int main(int ac, char **av)
 		printf("Buffer Memory Error");
 		return (0);
 	}    
+	buckit = malloc(sizeof(bucket));
+	if (buckit == NULL)
+		return (EXIT_FAILURE);
+	buckit->lines = NULL;
+	buckit->ops = NULL;
+	buckit->head = NULL;
 	read(fd, buffer, bytes);
-	lines = str_to_double(buffer, "\n");
-	free(buffer);
-	run_commands(lines, &head);
-	free_double(lines);
 	close(fd);
+	buckit->lines = str_to_double(buffer, "\n");
+	free(buffer);
+	run_commands();
+	free_double(buckit->lines);
 	return (0);
 }
