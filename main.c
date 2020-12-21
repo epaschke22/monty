@@ -49,7 +49,7 @@ void run_commands(void)
 		}
 		if (strcmp(buckit->ops[0], "push") == 0)
 		{
-			push(&(buckit->head), buckit->ops[1]);
+			push(&(buckit->head), buckit->ops[1], i);
 			free_double(buckit->ops);
 			continue;
 		}

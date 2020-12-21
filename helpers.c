@@ -68,4 +68,5 @@ void free_all(void)
 	free_double(buckit->ops);
 	free_list(buckit->head);
 	free(buckit);
-} 
+}
+
