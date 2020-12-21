@@ -41,6 +41,18 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+
+/**
+ *  struct data - things we need for functions
+ *  @lines: lines from files
+ * @ops: lines separated by command and args
+ */
+typedef struct data {
+	char **lines;
+	char **ops;
+	stack_t *head;
+} bucket;
+
 /*str_to_double.c*/
 char **str_to_double(char *input, char *delm);
 void free_double(char **dptr);
