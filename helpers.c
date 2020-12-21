@@ -8,7 +8,6 @@
  * Return: returns error message if error is
  * found else NULL
  */
-
 char *check_error(int ac, char **av)
 {
 	char *message;
@@ -50,7 +49,6 @@ char *check_error(int ac, char **av)
  * Return: number of bytes
  * @file: file pointer to file that will have bytes counted
  */
-
 int count_bytes(FILE *file)
 {
 	int bytes;
@@ -60,6 +58,10 @@ int count_bytes(FILE *file)
 	return (bytes);
 }
 
+/**
+ * free_all - frees all allocated space
+ * Return: void
+ */
 void free_all(void)
 {
 	free_double(buckit->lines);
@@ -67,3 +69,4 @@ void free_all(void)
 	free_list(buckit->head);
 	free(buckit);
 }
+
