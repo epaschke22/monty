@@ -114,8 +114,6 @@ void free_list(stack_t *head)
 		free(temp);
 	}
 }
-<<<<<<< HEAD
-=======
 
 /**
  * dlistint_len - counts the number of nodes in a linked list
@@ -133,5 +131,3 @@ int dlistint_len(stack_t *node)
 	}
 	return (numNodes);
 }
-
->>>>>>> bf7c1a93f644ba90ae03a61305983aef3683b837
