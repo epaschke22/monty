@@ -20,6 +20,7 @@ void (*get_command(char *name))(stack_t **stack, unsigned int line_number)
 	}
 	printf("WHERE IS MY FUNCTION??");
 	return (NULL);
+
 }
 
 
@@ -48,6 +49,11 @@ char *run_commands(global_struct *bucket)
 
 int main(int ac, char **av)
 {
+<<<<<<< HEAD
+=======
+	stack_t *head = NULL;
+
+>>>>>>> 5e0b8d5f049d5ac4fefc17342d02e0a8b42d9714
 	char *error = check_error(ac, av), *buffer = NULL;
 	char **lines = NULL, **ops = NULL;
 	int bytes = 0, fd = 0, i;
