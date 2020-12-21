@@ -85,7 +85,12 @@ stack_t *remove_end(stack_t **head)
 	int len = 0, i = 0;
 
 	tmphead = *head;
-	len = dlistint_len(tmphead);
+	while (tmphead->next != NULL)
+	{
+		tmphead = tmphead->next;
+		len++;
+	}
+	tmphead = *head;
 	while (i < len - 2)
 	{
 		tmphead = tmphead->next;
@@ -114,21 +119,3 @@ void free_list(stack_t *head)
 		free(temp);
 	}
 }
-
-/**
- * dlistint_len - counts the number of nodes in a linked list
- * Return: number of nodes
- * @h: head of linked list
- */
-int dlistint_len(stack_t *node)
-{
-	int numNodes = 0;
-
-	while (node != NULL)
-	{
-		numNodes++;
-		node  = node->next;
-	}
-	return (numNodes);
-}
-

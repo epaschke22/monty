@@ -20,7 +20,6 @@
  * Description: doubly linked list node structure
  * for stack, queues, LIFO, FIFO Holberton project
  */
-
 typedef struct stack_s
 {
         int n;
@@ -42,31 +41,44 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+
 /**
- * struct data - stuff we need to malloc then free
- * @lines; lines of of the file
- * @ops: lines separated into commands and arguments
+ *  struct data - things we need for functions
+ *  @lines: lines from files
+ * @ops: lines separated by command and args
  */
-typedef struct data
-{
-        char **lines;
-        char **ops;
-        stack_t *head;
-} global_struct;
+typedef struct data {
+	char **lines;
+	char **ops;
+	stack_t *head;
+} bucket;
 
-
+/*str_to_double.c*/
 char **str_to_double(char *input, char *delm);
 void free_double(char **dptr);
 
+/*linkedlist_functions.c*/
 stack_t *add_first(stack_t **head, const int n);
 stack_t *add_end(stack_t **head, const int n);
 stack_t *remove_first(stack_t **head);
 stack_t *remove_end(stack_t **head);
 void free_list(stack_t *head);
 
+/*helpers.c*/
 char *check_error(int ac, char **av);
 int count_bytes(FILE *file);
-void push(stack_t **head, int data);
+
+/*monty_functions1.c*/
+void push(stack_t **head, char *data);
 void pall(stack_t **head, unsigned int line_number);
-int list_len(stack_t *h);
+void pint(stack_t **head, unsigned int line_number);
+void pop(stack_t **head, unsigned int line_number);
+void swap(stack_t **head, unsigned int line_number);
+
+/*monty_functions2.c*/
+void m_add(stack_t **head, unsigned int line_number);
+void m_sub(stack_t **head, unsigned int line_number);
+void m_div(stack_t **head, unsigned int line_number);
+void m_mul(stack_t **head, unsigned int line_number);
+void m_mod(stack_t **head, unsigned int line_number);
 #endif
