@@ -43,8 +43,8 @@ typedef struct instruction_s
 
 
 /**
- *  struct data - things we need for functions
- *  @lines: lines from files
+ * struct data - things we need for functions
+ * @lines: lines from files
  * @ops: lines separated by command and args
  */
 typedef struct data {
