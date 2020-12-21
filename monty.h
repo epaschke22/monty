@@ -52,6 +52,8 @@ typedef struct data {
 	stack_t *head;
 } bucket;
 
+bucket *buckit;
+
 /*str_to_double.c*/
 char **str_to_double(char *input, char *delm);
 void free_double(char **dptr);
@@ -66,6 +68,7 @@ void free_list(stack_t *head);
 /*helpers.c*/
 char *check_error(int ac, char **av);
 int count_bytes(FILE *file);
+void free_all(void);
 
 /*monty_functions1.c*/
 void push(stack_t **head, char *data);

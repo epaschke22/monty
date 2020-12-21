@@ -1,7 +1,5 @@
 #include "monty.h"
 
-bucket *buckit;
-
 /**
  * get_command - returns function pointer based on input name
  * @name: name to compare for function
@@ -104,6 +102,6 @@ int main(int ac, char **av)
 	buckit->lines = str_to_double(buffer, "\n");
 	free(buffer);
 	run_commands();
-	free_double(buckit->lines);
+	free_all();
 	return (0);
 }
