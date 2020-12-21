@@ -1,6 +1,5 @@
 #include "monty.h"
 
-
 /**
  * get_command - returns function pointer based on input name
  * @name: name to compare for function
