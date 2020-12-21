@@ -71,7 +71,7 @@ int count_bytes(FILE *file);
 void free_all(void);
 
 /*monty_functions1.c*/
-void push(stack_t **head, char *data);
+void push(stack_t **head, char *data, unsigned int line_number);
 void pall(stack_t **head, unsigned int line_number);
 void pint(stack_t **head, unsigned int line_number);
 void pop(stack_t **head, unsigned int line_number);

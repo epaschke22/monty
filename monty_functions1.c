@@ -6,9 +6,16 @@
  * @data: int to add to the node
  * Return: void
  */ 
-void push(stack_t **head, char *data)
+void push(stack_t **head, char *data, unsigned int line_number)
 {
+	if ((atoi(data) == 0) && (data[0] != '0'))
+	{
+		free_all();
+		fprintf(stderr, "L%u: usage: push integer\n", line_number + 1); 
+		exit(EXIT_FAILURE);
+	}
 	add_first(head, atoi(data));
+
 }
 
 /**
