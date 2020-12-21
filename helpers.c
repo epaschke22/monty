@@ -59,3 +59,21 @@ int count_bytes(FILE *file)
 		;
 	return (bytes);
 }
+
+
+/**
+ * list_len- counts the number of nodes in a linked list
+ * Return: number of nodes
+ * @h: head of linked list
+ */
+int list_len(stack_t *h)
+{
+	int numNodes = 0;
+
+	while (h != NULL)
+	{
+		numNodes++;
+		h = h->next;
+	}
+	return (numNodes);
+}

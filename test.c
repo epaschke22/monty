@@ -1,5 +1,7 @@
 #include "monty.h"
 
+global_struct *bucket;
+
 void (*get_command(char *name))(stack_t **stack, unsigned int line_number)
 {
 	instruction_t cmd_list[] = {
@@ -21,17 +23,17 @@ void (*get_command(char *name))(stack_t **stack, unsigned int line_number)
 }
 
 
-void run_commands(char **lines, stack_t **head)
+char *run_commands(global_struct *bucket)
 {
-	int i, j;
+	int i, j, error = 0;
 	void (*output)(stack_t **stack, unsigned int line_number); 
-	char **ops = NULL;
 	
 	for (i = 0; lines[i] != NULL; i++)
 	{
-		ops = str_to_double(lines[i], " ");
-		if (strcmp(ops[0], "nop") == 0)
+		bucket->ops = str_to_double(lines[i], " ");
+		if (strcmp(bucket.ops[0], "nop") == 0)
 			continue;
+		error = check_commands(head, ops);
 		if (strcmp(ops[0], "push") == 0)
 		{	
 			push(head, atoi(ops[1]));
@@ -46,19 +48,21 @@ void run_commands(char **lines, stack_t **head)
 
 int main(int ac, char **av)
 {
-	stack_t *head = NULL;
 	char *error = check_error(ac, av), *buffer = NULL;
 	char **lines = NULL, **ops = NULL;
 	int bytes = 0, fd = 0, i;
 	FILE *code = NULL;
-
-	head = NULL;
+	
 	if (error != NULL)
 	{
 		write(STDERR_FILENO, error, strlen(error));
 		free(error);
 		return (EXIT_FAILURE);
 	}
+	bucket = malloc(sizeof(global_struct));
+	bucket->lines = NULL;
+	bucket->ops = NULL;
+	bucket->head = NULL;
 	code = fopen(av[1], "r");
 	bytes = count_bytes(code);
 	fclose(code);
@@ -72,10 +76,9 @@ int main(int ac, char **av)
 		return (0);
 	}    
 	read(fd, buffer, bytes);
-	lines = str_to_double(buffer, "\n");
-	free(buffer);
-	run_commands(lines, &head);
-	free_double(lines);
 	close(fd);
+	bucket->lines = str_to_double(buffer, "\n")i;
+	free(buffer);
+	run_commands(bucket->lines, bucket->head);
 	return (0);
 }

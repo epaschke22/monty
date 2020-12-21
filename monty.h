@@ -20,6 +20,7 @@
  * Description: doubly linked list node structure
  * for stack, queues, LIFO, FIFO Holberton project
  */
+
 typedef struct stack_s
 {
         int n;
@@ -41,6 +42,19 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct data - stuff we need to malloc then free
+ * @lines; lines of of the file
+ * @ops: lines separated into commands and arguments
+ */
+typedef struct data
+{
+        char **lines;
+        char **ops;
+        stack_t *head;
+} global_struct;
+
+
 char **str_to_double(char *input, char *delm);
 void free_double(char **dptr);
 
@@ -54,5 +68,5 @@ char *check_error(int ac, char **av);
 int count_bytes(FILE *file);
 void push(stack_t **head, int data);
 void pall(stack_t **head, unsigned int line_number);
-int dlistint_len(stack_t *node);
+int list_len(stack_t *h);
 #endif
