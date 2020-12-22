@@ -101,7 +101,7 @@ void m_mod(stack_t **head, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	if (start->n == 0)
+	if (start->next->n == 0)
 	{
 		free_all();
 		dprintf(STDERR_FILENO, "L%u: division by zero\n", line_number + 1);

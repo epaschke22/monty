@@ -42,9 +42,10 @@ void pstr(stack_t **head, unsigned int line_number)
 	{
 		if (start->n < 32 || start->n > 126)
 			break;
-		printf("%c\n", start->n);
+		printf("%c", start->n);
 		start = start->next;
 	}
+	printf("\n");
 }
 
 /**

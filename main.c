@@ -9,7 +9,7 @@ void (*get_command(char *name))(stack_t **stack, unsigned int line_number)
 {
 	instruction_t cmd_list[] = {
 		{"pall", pall}, {"pint", pint}, {"pop", pop},
-		{"swap", swap}, {"add", m_add}, {"div", m_div},
+		{"swap", swap}, {"add", m_add}, {"sub", m_sub}, {"div", m_div},
 		{"mul", m_mul}, {"mod", m_mod}, {"pchar", pchar}, {"pstr", pstr},
 		{"rotl", rotl}, {"rotr", rotr}, /*{"stack", stack}, {"queue" queue},*/
 		{NULL, function_not_found}
