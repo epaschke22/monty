@@ -72,7 +72,7 @@ void free_all(void)
 }
 
 /**
- * void function_not_found - returns error for invalid command
+ * function_not_found - returns error for invalid command
  * @head: pointer to stack
  * @line_number: line count
  * Return: void

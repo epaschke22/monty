@@ -73,7 +73,6 @@ int count_bytes(FILE *file);
 void free_all(void);
 void function_not_found(stack_t **head, unsigned int line_number);
 
-
 /*monty_functions1.c*/
 void push(stack_t **head, char *data, unsigned int line_number);
 void pall(stack_t **head, unsigned int line_number);
@@ -93,5 +92,4 @@ void pchar(stack_t **head, unsigned int line_number);
 void pstr(stack_t **head, unsigned int line_number);
 void rotl(stack_t **head, unsigned int line_number);
 void rotr(stack_t **head, unsigned int line_number);
-
 #endif
