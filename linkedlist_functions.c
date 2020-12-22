@@ -88,7 +88,7 @@ stack_t *remove_end(stack_t **head)
 	if (tmphead->next == NULL)
 	{
 		*head = NULL;
-		return(*head);
+		return (*head);
 	}
 	while (tmphead->next != NULL)
 		tmphead = tmphead->next;
