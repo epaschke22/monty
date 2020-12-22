@@ -21,11 +21,9 @@ void (*get_command(char *name))(stack_t **stack, unsigned int line_number)
 	for (i = 0; cmd_list[i].opcode != NULL; i++)
 	{
 		if (strcmp(cmd_list[i].opcode, name) == 0)
-			return(cmd_list[i].f);
+			break;
 	}
-	printf("WHERE IS MY FUNCTION??");
-	return (NULL);
-
+	return (cmd_list[i].f);
 }
 
 /**
@@ -102,6 +100,8 @@ int main(int ac, char **av)
 	buckit->lines = str_to_double(buffer, "\n");
 	free(buffer);
 	run_commands();
-	free_all();
+	free_double(buckit->lines);
+	free_list(buckit->head);
+	free(buckit);
 	return (0);
 }
