@@ -85,7 +85,7 @@ int main(int ac, char **av)
 	fd = open(av[1], O_RDWR);
 	if (fd == -1)
 		return (EXIT_FAILURE);
-	buffer = malloc(sizeof(char) * bytes);
+	buffer = malloc(sizeof(char) * bytes + 1);
 	if (buffer == NULL)
 	{
 		printf("Buffer Memory Error");
@@ -99,6 +99,7 @@ int main(int ac, char **av)
 	buckit->ops = NULL;
 	buckit->head = NULL;
 	read(fd, buffer, bytes);
+	buffer[bytes] = '\0';
 	close(fd);
 	buckit->lines = str_to_double(buffer, "\n");
 	free(buffer);
