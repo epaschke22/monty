@@ -8,18 +8,19 @@
  */
 void pchar(stack_t **head, unsigned int line_number)
 {
+	int ln = line_number + 1;
 	stack_t *start = *head;
 
 	if (start == NULL)
 	{
 		free_all();
-		dprintf(STDERR_FILENO, "L%u: can't pchar, stack empty\n", line_number + 1);
+		dprintf(STDERR_FILENO, "L%u: can't pchar, stack empty\n", ln);
 		exit(EXIT_FAILURE);
 	}
 	if (start->n < 32 || start->n > 126)
 	{
 		free_all();
-		dprintf(STDERR_FILENO, "L%u: can't pchar, value out of range\n", line_number + 1);
+		dprintf(STDERR_FILENO, "L%u: can't pchar, value out of range\n", ln);
 		exit(EXIT_FAILURE);
 	}
 	printf("%c\n", start->n);
