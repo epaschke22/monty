@@ -37,6 +37,7 @@ stack_t *add_end(stack_t **head, const int n)
 		return (NULL);
 	new->n = n;
 	new->next = NULL;
+	new->prev = NULL;
 	if (*head == NULL)
 	{
 		*head = new;
@@ -81,26 +82,19 @@ stack_t *remove_first(stack_t **head)
  */
 stack_t *remove_end(stack_t **head)
 {
-	stack_t *temp, *tmphead;
-	int len = 0, i = 0;
+	stack_t *tmphead;
 
 	tmphead = *head;
+	if (tmphead->next == NULL)
+	{
+		*head = NULL;
+		return(*head);
+	}
 	while (tmphead->next != NULL)
-	{
 		tmphead = tmphead->next;
-		len++;
-	}
-	tmphead = *head;
-	while (i < len - 2)
-	{
-		tmphead = tmphead->next;
-		i++;
-	}
-	temp = tmphead->next;
-	temp->prev = NULL;
-	tmphead->next = NULL;
-	free(temp);
-	return (*head);
+	tmphead->prev->next = NULL;
+	free(tmphead);
+	return (tmphead);
 }
 
 /**
