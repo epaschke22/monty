@@ -69,7 +69,8 @@ void run_commands(void)
  */
 int main(int ac, char **av)
 {
-	char *error = check_error(ac, av), *buffer = NULL;
+	char buffer[1024];
+	char *error = check_error(ac, av);
 	int bytes = 0, fd = 0;
 	FILE *code = NULL;
 
@@ -80,7 +81,6 @@ int main(int ac, char **av)
 		return (EXIT_FAILURE);
 	}
 	code = fopen(av[1], "r");
-	bytes = count_bytes(code);
 	fclose(code);
 	fd = open(av[1], O_RDWR);
 	if (fd == -1)
