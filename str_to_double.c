@@ -37,7 +37,7 @@ char **str_to_double(char *input, char *delm)
 	return (output);
 }
 
-/**
+/** 
  * free_double - frees up all allocated space of a double pointer
  * @dptr: double pointer to free.
  * Return: void
