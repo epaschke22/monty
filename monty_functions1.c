@@ -28,6 +28,7 @@ void pall(stack_t **head, unsigned int line_number)
 {
 	stack_t *start = *head;
 
+	(void)line_number;
 	while (start != NULL)
 	{
 		printf("%d\n", start->n);
