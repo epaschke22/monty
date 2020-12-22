@@ -19,7 +19,7 @@ void pchar(stack_t **head, unsigned int line_number)
 	if (start->n < 32 || start->n > 126)
 	{
 		free_all();
-		dprintf(STDERR_FILENO, "L%u: can't pchar, value out of range\n", line_number + 1);
+		fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number + 1);
 		exit(EXIT_FAILURE);
 	}
 	printf("%c\n", start->n);
