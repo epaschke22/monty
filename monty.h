@@ -83,4 +83,10 @@ void m_sub(stack_t **head, unsigned int line_number);
 void m_div(stack_t **head, unsigned int line_number);
 void m_mul(stack_t **head, unsigned int line_number);
 void m_mod(stack_t **head, unsigned int line_number);
+
+/*monty_functions3.c*/
+void pchar(stack_t **head, unsigned int line_number);
+void pstr(stack_t **head, unsigned int line_number);
+void rotl(stack_t **head, unsigned int line_number);
+void rotr(stack_t **head, unsigned int line_number);
 #endif
