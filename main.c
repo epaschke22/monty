@@ -12,7 +12,7 @@ void (*get_command(char *name))(stack_t **stack, unsigned int line_number)
 		{"swap", swap}, {"add", m_add}, {"div", m_div},
 		{"mul", m_mul}, {"mod", m_mod}, {"pchar", pchar}, {"pstr", pstr},
 		{"rotl", rotl}, {"rotr", rotr}, /*{"stack", stack}, {"queue" queue},*/
-		{NULL, NULL}
+		{NULL, function_not_found}
 		};
 	int i;
 
