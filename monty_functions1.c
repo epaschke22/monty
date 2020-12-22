@@ -84,7 +84,7 @@ void swap(stack_t **head, unsigned int line_number)
 	stack_t *start = *head;
 	int temp;
 
-	if (start == NULL)
+	if (start == NULL || start->next == NULL)
 	{
 		free_all();
 		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
