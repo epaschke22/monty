@@ -12,13 +12,13 @@ char *check_error(int ac, char **av)
 {
 	char *message;
 	char *err1 = "USAGE: monty file\n", *err2 = "Error: Can't open file ";
-	FILE *file = NULL;	
-	
+	FILE *file = NULL;
+
 	if (ac != 2)
 	{
 		message = malloc((strlen(err1) + 1) * sizeof(char));
 		if (message == NULL)
-		{	
+		{
 			printf("Memory Error");
 			return (NULL);
 		}
@@ -33,7 +33,7 @@ char *check_error(int ac, char **av)
 		{
 			printf("Memory Error");
 			return (NULL);
-		}	
+		}
 		strcpy(message, err2);
 		strcat(message, av[1]);
 		strcat(message, "\n\0");

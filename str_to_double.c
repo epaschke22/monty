@@ -17,7 +17,7 @@ char **str_to_double(char *input, char *delm)
 	output = malloc(sizeof(char *) * (cmdlen + 2));
 	if (output == NULL)
 	{
-		fprintf(stderr, "Error: malloc failed\n"); 
+		fprintf(stderr, "Error: malloc failed\n");
 		return (NULL);
 	}
 	item = strtok(input, delm);
@@ -27,7 +27,7 @@ char **str_to_double(char *input, char *delm)
 		if (output[i] == NULL)
 		{
 			free_double(output);
-			fprintf(stderr, "Error: malloc failed\n"); 
+			fprintf(stderr, "Error: malloc failed\n");
 			return (NULL);
 		}
 		strcpy(output[i], item);
