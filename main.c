@@ -40,6 +40,12 @@ void run_commands(void)
 	for (i = 0; buckit->lines[i] != NULL; i++)
 	{
 		buckit->ops = str_to_double(buckit->lines[i], " ");
+		if (buckit->ops == NULL)
+		{
+			free_double(buckit->lines);
+			free(buckit);
+			exit(EXIT_FAILURE);
+		}
 		if (strcmp(buckit->ops[0], "nop") == 0)
 		{
 			free_double(buckit->ops);

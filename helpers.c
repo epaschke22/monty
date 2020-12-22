@@ -65,8 +65,7 @@ int count_bytes(FILE *file)
 void free_all(void)
 {
 	free_double(buckit->lines);
-	if (*(buckit->ops))
-		free_double(buckit->ops);
+	free_double(buckit->ops);
 	free_list(buckit->head);
 	free(buckit);
 }

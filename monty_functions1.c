@@ -15,7 +15,6 @@ void push(stack_t **head, char *data, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	add_first(head, atoi(data));
-
 }
 
 /**
@@ -27,6 +26,7 @@ void push(stack_t **head, char *data, unsigned int line_number)
 void pall(stack_t **head, unsigned int line_number)
 {
 	stack_t *start = *head;
+	(void)line_number;
 
 	while (start != NULL)
 	{
