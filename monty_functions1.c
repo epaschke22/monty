@@ -78,6 +78,7 @@ void pop(stack_t **head, unsigned int line_number)
  * @line_number: current line number
  * Return: void
  */
+
 void swap(stack_t **head, unsigned int line_number)
 {
 	stack_t *start = *head;

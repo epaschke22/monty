@@ -91,6 +91,7 @@ int main(int ac, char **av)
 		printf("Buffer Memory Error");
 		return (0);
 	}
+
 	buckit = malloc(sizeof(bucket));
 	if (buckit == NULL)
 		return (EXIT_FAILURE);

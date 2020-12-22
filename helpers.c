@@ -33,6 +33,7 @@ char *check_error(int ac, char **av)
 		{
 			printf("Memory Error");
 			return (NULL);
+
 		}
 		strcpy(message, err2);
 		strcat(message, av[1]);
@@ -70,3 +71,16 @@ void free_all(void)
 	free(buckit);
 }
 
+/**
+ * void function_not_found - returns error for invalid command
+ * @head: pointer to stack
+ * @line_number: line count
+ * Return: void
+ */
+void function_not_found(stack_t **head, unsigned int line_number)
+{
+	(void)head;
+	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, buckit->ops[0]);
+	free_all();
+	exit(EXIT_FAILURE);
+}
