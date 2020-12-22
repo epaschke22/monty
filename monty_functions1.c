@@ -12,7 +12,7 @@ void push(stack_t **head, char *data, unsigned int line_number)
 	if ((atoi(data) == 0) && (data[0] != '0'))
 	{
 		free_all();
-		fprintf(stderr, "L%u: usage: push integer\n", line_number + 1);
+		dprintf(STDERR_FILENO, "L%u: usage: push integer\n", line_number + 1);
 		exit(EXIT_FAILURE);
 	}
 	add_first(head, atoi(data));
@@ -49,7 +49,7 @@ void pint(stack_t **head, unsigned int line_number)
 	if (start == NULL)
 	{
 		free_all();
-		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		dprintf(STDERR_FILENO, "L%u: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", start->n);
@@ -66,7 +66,7 @@ void pop(stack_t **head, unsigned int line_number)
 	if (*head == NULL)
 	{
 		free_all();
-		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		dprintf(STDERR_FILENO, "L%u: can't pop an empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	remove_first(head);
@@ -87,7 +87,7 @@ void swap(stack_t **head, unsigned int line_number)
 	if (start == NULL)
 	{
 		free_all();
-		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+		dprintf(STDERR_FILENO, "L%u: can't swap, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	temp = start->n;
