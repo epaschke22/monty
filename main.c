@@ -3,8 +3,6 @@
 /**
  * get_command - returns function pointer based on input name
  * @name: name to compare for function
- * @stack: linked list that poitns to head used in each function
- * @line_number: the current line number count to be used within each function
  * Return: function pointer
  */
 void (*get_command(char *name))(stack_t **stack, unsigned int line_number)
@@ -12,9 +10,9 @@ void (*get_command(char *name))(stack_t **stack, unsigned int line_number)
 	instruction_t cmd_list[] = {
 		{"pall", pall}, {"pint", pint}, {"pop", pop},
 		{"swap", swap}, {"add", m_add}, {"div", m_div},
-		{"mul", m_mul}, {"mod", m_mod}, /*{"pchar", pchar}, {"pstr", pstr},
-		{"rotl", rotl}, {"rotr", rotr}, {"stack", stack}, {"queue" queue},*/
-		{NULL, function_not_found}
+		{"mul", m_mul}, {"mod", m_mod}, {"pchar", pchar}, {"pstr", pstr},
+		{"rotl", rotl}, {"rotr", rotr}, /*{"stack", stack}, {"queue" queue},*/
+		{NULL, NULL}
 		};
 	int i;
 
@@ -28,18 +26,22 @@ void (*get_command(char *name))(stack_t **stack, unsigned int line_number)
 
 /**
  * run_commands - runs all commands from lines
- * @lines: double pointer of each line from the monty file
- * @head: linked list stack pointing to head
- * Return: always 0
+ * Return: void
  */
 void run_commands(void)
 {
 	unsigned int i;
-	void (*output)(stack_t **stack, unsigned int line_number); 
-	
+	void (*output)(stack_t **stack, unsigned int line_number);
+
 	for (i = 0; buckit->lines[i] != NULL; i++)
 	{
 		buckit->ops = str_to_double(buckit->lines[i], " ");
+		if (buckit->ops == NULL)
+		{
+			free_double(buckit->lines);
+			free(buckit);
+			exit(EXIT_FAILURE);
+		}
 		if (strcmp(buckit->ops[0], "nop") == 0)
 		{
 			free_double(buckit->ops);
@@ -51,8 +53,8 @@ void run_commands(void)
 			free_double(buckit->ops);
 			continue;
 		}
-		output = get_command(buckit->ops[0]); 
-		if (output== NULL)
+		output = get_command(buckit->ops[0]);
+		if (output == NULL)
 			printf("OUTPUT IS NULL");
 		output(&(buckit->head), i);
 		free_double(buckit->ops);
@@ -88,7 +90,8 @@ int main(int ac, char **av)
 	{
 		printf("Buffer Memory Error");
 		return (0);
-	}    
+	}
+
 	buckit = malloc(sizeof(bucket));
 	if (buckit == NULL)
 		return (EXIT_FAILURE);

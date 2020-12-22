@@ -104,7 +104,7 @@ stack_t *remove_end(stack_t **head)
 }
 
 /**
- * free_dlistint - frees memory of each item in a list
+ * free_list - frees memory of each item in a list
  * @head: list to free
  * Return: void
  */
