@@ -46,12 +46,14 @@ typedef struct instruction_s
  * @code: data from file
  * @ops: lines separated by command and args
  * @head: pointer to stack
+ * @stackmode: checks queue and stack modes
  */
 typedef struct data
 {
 	FILE *code;
 	char **ops;
 	stack_t *head;
+	int stackmode;
 } bucket;
 
 bucket *buckit;

@@ -21,7 +21,10 @@ void push(stack_t **head, char *data, unsigned int line_number)
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	add_first(head, atoi(data));
+	if (buckit->stackmode == 0)
+		add_first(head, atoi(data));
+	else
+		add_end(head, atoi(data));
 }
 
 /**

@@ -11,8 +11,7 @@ void (*get_command(char *name))(stack_t **stack, unsigned int line_number)
 		{"pall", pall}, {"pint", pint}, {"pop", pop},
 		{"swap", swap}, {"add", m_add}, {"sub", m_sub}, {"div", m_div},
 		{"mul", m_mul}, {"mod", m_mod}, {"pchar", pchar}, {"pstr", pstr},
-		{"rotl", rotl}, {"rotr", rotr}, /*{"stack", stack}, {"queue" queue},*/
-		{NULL, function_not_found}
+		{"rotl", rotl}, {"rotr", rotr}, {NULL, function_not_found}
 		};
 	int i;
 
@@ -34,20 +33,18 @@ void run_commands(unsigned int line_count)
 	void (*output)(stack_t **stack, unsigned int line_number);
 
 	if (strcmp(buckit->ops[0], "nop") == 0)
-	{
-		free_double(buckit->ops);
-		return;
-	}
-	if (strcmp(buckit->ops[0], "push") == 0)
-	{
+		;
+	else if (strcmp(buckit->ops[0], "stack") == 0)
+		buckit->stackmode = 0;
+	else if (strcmp(buckit->ops[0], "queue") == 0)
+		buckit->stackmode = 1;
+	else if (strcmp(buckit->ops[0], "push") == 0)
 		push(&(buckit->head), buckit->ops[1], line_count);
-		free_double(buckit->ops);
-		return;
+	else
+	{
+		output = get_command(buckit->ops[0]);
+		output(&(buckit->head), line_count);
 	}
-	output = get_command(buckit->ops[0]);
-	if (output == NULL)
-		printf("OUTPUT IS NULL");
-	output(&(buckit->head), line_count);
 	free_double(buckit->ops);
 }
 
@@ -68,7 +65,6 @@ int main(int ac, char **av)
 		free(error);
 		return (EXIT_FAILURE);
 	}
-
 	buckit = malloc(sizeof(bucket));
 	if (buckit == NULL)
 	{
@@ -77,7 +73,7 @@ int main(int ac, char **av)
 	}
 	buckit->head = NULL;
 	buckit->code = fopen(av[1], "r");
-
+	buckit->stackmode = 0;
 	while (fgets(buffer, 1024, buckit->code) != NULL)
 	{
 		line_count++;
