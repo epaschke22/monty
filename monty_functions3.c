@@ -8,7 +8,7 @@
  */
 void pchar(stack_t **head, unsigned int line_number)
 {
-	int ln = line_number + 1;
+	int ln = line_number;
 	stack_t *start = *head;
 
 	if (start == NULL)

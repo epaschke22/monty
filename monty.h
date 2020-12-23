@@ -43,13 +43,13 @@ typedef struct instruction_s
 
 /**
  * struct data - things we need for functions
- * @lines: lines from files
+ * @code: data from file
  * @ops: lines separated by command and args
  * @head: pointer to stack
  */
 typedef struct data
 {
-	char **lines;
+	FILE *code;
 	char **ops;
 	stack_t *head;
 } bucket;

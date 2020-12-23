@@ -26,39 +26,29 @@ void (*get_command(char *name))(stack_t **stack, unsigned int line_number)
 
 /**
  * run_commands - runs all commands from lines
+ * @line_count: current line number
  * Return: void
  */
-void run_commands(void)
+void run_commands(unsigned int line_count)
 {
-	unsigned int i;
 	void (*output)(stack_t **stack, unsigned int line_number);
 
-	for (i = 0; buckit->lines[i] != NULL; i++)
+	if (strcmp(buckit->ops[0], "nop") == 0)
 	{
-		buckit->ops = str_to_double(buckit->lines[i], " ");
-		if (buckit->ops == NULL)
-		{
-			free_double(buckit->lines);
-			free(buckit);
-			exit(EXIT_FAILURE);
-		}
-		if (strcmp(buckit->ops[0], "nop") == 0)
-		{
-			free_double(buckit->ops);
-			continue;
-		}
-		if (strcmp(buckit->ops[0], "push") == 0)
-		{
-			push(&(buckit->head), buckit->ops[1], i);
-			free_double(buckit->ops);
-			continue;
-		}
-		output = get_command(buckit->ops[0]);
-		if (output == NULL)
-			printf("OUTPUT IS NULL");
-		output(&(buckit->head), i);
 		free_double(buckit->ops);
+		return;
 	}
+	if (strcmp(buckit->ops[0], "push") == 0)
+	{
+		push(&(buckit->head), buckit->ops[1], line_count);
+		free_double(buckit->ops);
+		return;
+	}
+	output = get_command(buckit->ops[0]);
+	if (output == NULL)
+		printf("OUTPUT IS NULL");
+	output(&(buckit->head), line_count);
+	free_double(buckit->ops);
 }
 
 /**
@@ -69,9 +59,8 @@ void run_commands(void)
  */
 int main(int ac, char **av)
 {
-	char *error = check_error(ac, av), *buffer = NULL;
-	int bytes = 0, fd = 0;
-	FILE *code = NULL;
+	char *error = check_error(ac, av), buffer[1024];
+	unsigned int line_count = 0, i;
 
 	if (error != NULL)
 	{
@@ -79,33 +68,29 @@ int main(int ac, char **av)
 		free(error);
 		return (EXIT_FAILURE);
 	}
-	code = fopen(av[1], "r");
-	bytes = count_bytes(code);
-	fclose(code);
-	fd = open(av[1], O_RDWR);
-	if (fd == -1)
-		return (EXIT_FAILURE);
-	buffer = malloc(sizeof(char) * bytes + 1);
-	if (buffer == NULL)
-	{
-		printf("Buffer Memory Error");
-		return (0);
-	}
 
 	buckit = malloc(sizeof(bucket));
 	if (buckit == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
 		return (EXIT_FAILURE);
-	buckit->lines = NULL;
-	buckit->ops = NULL;
+	}
 	buckit->head = NULL;
-	read(fd, buffer, bytes);
-	buffer[bytes] = '\0';
-	close(fd);
-	buckit->lines = str_to_double(buffer, "\n");
-	free(buffer);
-	run_commands();
-	free_double(buckit->lines);
+	buckit->code = fopen(av[1], "r");
+
+	while (fgets(buffer, 1024, buckit->code) != NULL)
+	{
+		line_count++;
+		if (strlen(buffer) == 1 || buffer[0] == '#')
+			continue;
+		for (i = 0; buffer[i]; i++)
+			if (buffer[i] == '\n')
+				buffer[i] = '\0';
+		buckit->ops = str_to_double(buffer, " ");
+		run_commands(line_count);
+	}
 	free_list(buckit->head);
+	fclose(buckit->code);
 	free(buckit);
 	return (0);
 }

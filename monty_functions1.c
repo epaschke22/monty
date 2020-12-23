@@ -12,13 +12,13 @@ void push(stack_t **head, char *data, unsigned int line_number)
 	if (data == NULL)
 	{
 		free_all();
-		fprintf(stderr, "L%u: usage: push integer\n", line_number + 1);
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	if ((atoi(data) == 0) && (data[0] != '0'))
 	{
 		free_all();
-		fprintf(stderr, "L%u: usage: push integer\n", line_number + 1);
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	add_first(head, atoi(data));
